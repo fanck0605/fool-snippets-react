@@ -8,8 +8,10 @@
 
 如果面包屑要自己整的话, 不如把 UserList 和 UserDetails 放在同一级路由.
 
-```tsx
-export default notLayout(UserListPage)
+```diff
+// UserListPage.tsx
+-export default UserListPage
++export default notLayout(UserListPage)
 ```
 
 ```tsx
