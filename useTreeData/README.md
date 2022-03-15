@@ -12,12 +12,12 @@ https://codesandbox.io/s/usetreedata-xqggzf?file=/src/App.tsx
 
 
 ```tsx
-import React, { useState, useEffect } from "react";
-import { Button, message, Space, Cascader } from "antd";
-import { ProFormText, ModalForm } from "@ant-design/pro-form";
-import useTreeData from "./useTreeData";
+import "./styles.css";
 import province from "./province";
 import city from "./city";
+import useTreeData from "./useTreeData";
+import { useEffect } from "react";
+import { Cascader } from "antd";
 
 const delay = (t: number) => {
   return new Promise<void>((resolve) => {
@@ -27,14 +27,15 @@ const delay = (t: number) => {
   });
 };
 
-const getAllDistricts = async (districtId: string | null) => {
+const getAllDistrictsByParentId = async (districtId: string | null) => {
   await delay(100);
-  const response = districtId === null ? province : city[districtId];
-  return response.data;
+  return districtId === null
+    ? province.map((it: any) => ({ ...it, isLeaf: false }))
+    : city[districtId].map((it: any) => ({ ...it, isLeaf: true }));
 };
 
-export default () => {
-  const { treeData, loadTreeData } = useTreeData(getAllDistricts);
+export default function App() {
+  const { treeData, loadTreeData } = useTreeData(getAllDistrictsByParentId);
 
   useEffect(() => {
     // 加载父节点数据
@@ -42,18 +43,19 @@ export default () => {
   }, [loadTreeData]);
 
   return (
-    <Cascader<any>
+    <Cascader<{ id: string; name: string; isLeaf: boolean }>
       options={treeData}
-      expandTrigger="hover"
+      changeOnSelect
       fieldNames={{ label: "name", value: "id" }}
       loadData={(districts) => {
         const district = districts[districts.length - 1];
         const children = district.children;
+        // 如果已经加载过了就不重复加载
         if (!children || children.length === 0) {
           loadTreeData(district.id);
         }
       }}
     />
   );
-};
+}
 ```
