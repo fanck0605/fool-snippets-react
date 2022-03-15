@@ -30,8 +30,8 @@ const delay = (t: number) => {
 const getAllDistrictsByParentId = async (districtId: string | null) => {
   await delay(100);
   return districtId === null
-    ? province.map((it: any) => ({ ...it, isLeaf: false }))
-    : city[districtId].map((it: any) => ({ ...it, isLeaf: true }));
+    ? province.map((it) => ({ ...it, isLeaf: false }))
+    : city[districtId].map((it) => ({ ...it, isLeaf: true }));
 };
 
 export default function App() {
