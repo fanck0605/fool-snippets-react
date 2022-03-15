@@ -4,7 +4,9 @@
 
 ## 基本用法
 
-主要在 ant design pro 项目中使用, 因为 ProContainer 可以根据多级路由配置自动生成面包屑. 如果面包屑要自己整的话, 不如把 UserList 和 UserDetails 放在同一级菜单.
+主要在 ant design pro 项目中使用, 因为 ProContainer 可以根据多级路由配置自动生成面包屑. 
+
+如果面包屑要自己整的话, 不如把 UserList 和 UserDetails 放在同一级路由.
 
 ```tsx
 export default notLayout(UserListPage)
