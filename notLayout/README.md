@@ -1,8 +1,10 @@
 # notLayout
 
-这是一个[高阶组件](https://zh-hans.reactjs.org/docs/higher-order-components.html), 主要配合 react-router 使用, 在多级路由配置时, 让本应该变成 layout 的组件作为一个界面展示, 同时**不影响**下面的子路由界面
+这是一个[高阶组件](https://zh-hans.reactjs.org/docs/higher-order-components.html), 主要配合 react-router 使用, 在多级路由配置时, 让本应该变成 layout 的组件作为一个界面展示, 同时**不影响**下面的子路由界面.
 
 ## 基本用法
+
+主要在 ant design pro 项目中使用, 因为 ProContainer 可以根据多级路由配置自动生成面包屑.
 
 ```tsx
 export default notLayout(UserListPage)
